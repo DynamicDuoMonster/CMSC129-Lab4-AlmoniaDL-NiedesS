@@ -69,4 +69,5 @@ GitHub Actions runs all tests on every push to `main`. Red-phase commits must sh
 
 ## Test Results
 
-*(Screenshots will be added as each part is completed.)*
+### Unit Test
+![alt text](docs/image-1.png)
