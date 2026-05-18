@@ -21,4 +21,4 @@ jobs:
 
       - run: npm run test:unit
       - run: npm run test:integration
-      #- run: npm run test:system
+      - run: npm run test:system
