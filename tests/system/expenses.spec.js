@@ -1,5 +1,13 @@
 const { test, expect } = require("@playwright/test");
 
+test.beforeEach(async ({ page }) => {
+  const res = await page.request.get("/api/expenses");
+  const expenses = await res.json();
+  for (const expense of expenses) {
+    await page.request.delete(`/api/expenses/${expense.id}`);
+  }
+});
+
 // User story 1: As a user, I want to add an expense with a title, amount, and category, so that I can log my spending.
 test("user can add an expense and see it in the list", async ({ page }) => {
   await page.goto("/");
@@ -22,6 +30,7 @@ test("user can see all their expenses in a list", async ({ page }) => {
   await page.getByTestId("amount-input").fill("50");
   await page.getByTestId("category-select").selectOption("Food");
   await page.getByTestId("submit-btn").click();
+  await expect(page.getByTestId("expense-item")).toHaveCount(1);
 
   await page.getByTestId("title-input").fill("Bus fare");
   await page.getByTestId("amount-input").fill("30");
