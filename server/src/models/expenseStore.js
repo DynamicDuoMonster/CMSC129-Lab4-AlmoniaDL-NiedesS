@@ -1,13 +1,22 @@
+const { randomUUID } = require("crypto");
+
+const expenses = [];
+
 function addExpense(validatedData) {
-  throw new Error("Not implemented");
+  const expense = { id: randomUUID(), ...validatedData };
+  expenses.push(expense);
+  return expense;
 }
 
 function getAllExpenses() {
-  throw new Error("Not implemented");
+  return [...expenses];
 }
 
 function deleteExpense(id) {
-  throw new Error("Not implemented");
+  const index = expenses.findIndex((e) => e.id === id);
+  if (index === -1) return null;
+  const [removed] = expenses.splice(index, 1);
+  return removed;
 }
 
 module.exports = { addExpense, getAllExpenses, deleteExpense };
