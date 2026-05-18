@@ -7,12 +7,16 @@ export default function ExpenseForm({ onAddExpense }) {
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("Food");
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    await onAddExpense({ title, amount: Number(amount), category });
+  function resetForm() {
     setTitle("");
     setAmount("");
     setCategory("Food");
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    await onAddExpense({ title, amount: Number(amount), category });
+    resetForm();
   }
 
   return (
