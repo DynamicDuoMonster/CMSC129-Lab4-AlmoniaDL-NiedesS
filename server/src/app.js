@@ -1,6 +1,8 @@
 const express = require("express");
-const app = express();
+const expensesRouter = require("./routes/expenses");
 
+const app = express();
 app.use(express.json());
+app.use("/api/expenses", expensesRouter);
 
 module.exports = app;
