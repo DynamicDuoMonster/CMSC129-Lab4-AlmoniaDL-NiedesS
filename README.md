@@ -74,3 +74,15 @@ GitHub Actions runs all tests on every push to `main`. Red-phase commits must sh
 
 ### Integration Test
 ![alt text](docs/image.png)
+
+### System Test
+![alt text](docs/system-test-pass.png)
+
+### All Tests
+![alt text](docs/unit-integration-system-pass.png)
+
+## Reflection
+
+The most challenging part of writing tests before code was visualizing the complete system before any features existed. Without a working implementation, it was difficult to determine exactly what to test and at what level of detail. For example, defining unit tests for `validateExpense()` required predicting exactly what edge cases the validation should handle — empty titles, negative amounts, invalid categories — before writing a single line of validation logic. Similarly, writing Playwright tests for the system layer meant imagining DOM structure and data-testid attributes for components that didn't yet exist. This forced us to think carefully upfront about how users would interact with the final application rather than coding first and testing later.
+
+Writing tests first fundamentally changed how we designed the code. It forced modularization at every level. Unit tests required pure, isolated validation functions separate from Express route handlers. Integration tests required clean HTTP abstractions where routes delegate to controllers and controllers delegate to the store. System tests required well-defined component interfaces and consistent `data-testid` attributes across the UI. Without TDD, our natural instinct would have been to write everything inline and refactor later. Writing tests first made modularity a prerequisite rather than an afterthought, resulting in a codebase where each layer has a single responsibility and each piece can be tested independently.
